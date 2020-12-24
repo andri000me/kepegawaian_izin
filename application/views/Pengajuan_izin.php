@@ -451,7 +451,7 @@
 							</div>
 						<?php } ?>
 						<!-- </div>
-                    <div class="col-md-6"> -->
+					<div class="col-md-6"> -->
 						<?php if ($getStaff[0]->izin_akses == 'kabid') { ?>
 							<div class="field item form-group">
 								<label class="col-form-label col-md-4 col-sm-3">Konfirmasi KA Bidang<span class="required">*</span></label>
@@ -479,7 +479,6 @@
 								</div>
 							</div>
 						<?php } ?>
-
 					</div>
 				</div>
 
@@ -592,7 +591,7 @@
 									<input type="text" id="ket_kabid" name="ket_kabid" class="form-control">
 								</div>
 							</div>
-						<?php } else if ($getStaff[0]->tipe == 'kabid_sdm') { ?>
+						<?php } else if ($getStaff[0]->tipe == 'apotik') { ?>
 							<div class="field item form-group">
 								<label class="col-form-label col-md-4 col-sm-3">Konfirmasi KA Bidang SDM<span class="required">*</span></label>
 								<div class="col-md-8 xdisplay_inputx form-group row ">
@@ -610,6 +609,10 @@
 								</div>
 							</div>
 						<?php } ?>
+						<?php if ($getJenisIzinByUsername[0]->jenis_izin != 'Lain-lain') { ?>
+							asdasd
+						<?php } else {
+						} ?>
 					</div>
 				</div>
 

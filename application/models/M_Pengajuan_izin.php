@@ -38,6 +38,17 @@ class M_Pengajuan_izin extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function getJenisIzinByUsername($username)
+	{
+		$this->db->select('ji.jenis_izin, ji.lama_izin');
+		$this->db->from('izin i');
+		$this->db->join('jenis_izin ji', 'ji.id_jenis_izin = i.id_jenis_izin', 'left');
+		$this->db->join('pegawai p', 'p.id_pegawai = i.id_pegawai', 'left');
+		$this->db->join('staff s', 's.id_staff = p.id_staff ', 'left');
+		$this->db->where('s.username', $username);
+		return $this->db->get()->result();
+	}
+
 	public function getByIdJenisIzin($id_jenis_izin)
 	{
 		$this->db->select('*');
