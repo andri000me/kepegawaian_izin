@@ -66,7 +66,7 @@ class Pengajuan_izin extends CI_Controller
 				}
 				// $th8  = $sso_user_data->tipe == 'kaunit' ? ($row->acc_kaunit == 0 ? '<button style="font-size:8px;" onclick="verifikasi(' . $id . ')" class="badge bg-red" >Diajukan</button>' : '<div style="font-size:12px;"> <label style="font-size:8px;" class="badge bg-blue" >Terverifikasi</label> </div>') : '<div style="font-size:12px;"> <label style="font-size:8px;" class="badge bg-red">Diajukan</label> </div>';
 				$th9  = '<div style="font-size:10px;">' . $row->ket_kaunit . '</div>';
-				if ($sso_user_data->tipe != 'apotik') {
+				if ($sso_user_data->tipe != 'kabid') {
 					$th10 = $row->acc_kabid == 0 ? '<label style="font-size:8px;"  class="badge bg-green" >Diajukan</label>' : ($row->acc_kabid == 1 ? '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-blue" > Terverifikasi</label></div>' : '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-red" > Ditolak</label></div>');
 				} else {
 					$th10 = $row->acc_kabid == 0 ? '<button style="font-size:8px;" onClick="verifikasi(' . $id . ')" class="badge bg-green" >Diajukan</button>' : ($row->acc_kabid == 1 ? '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-blue" onClick="verifikasi(' . $id . ')"> Terverifikasi</button></div>' : '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-red" onClick="verifikasi(' . $id . ')"> Ditolak</button></div>');
@@ -221,7 +221,7 @@ class Pengajuan_izin extends CI_Controller
 			if ($sso_user_data->tipe == 'kaunit') {
 				$db['acc_kaunit']    = htmlspecialchars($this->input->post('acc_kaunit'));
 				$db['ket_kaunit']    = htmlspecialchars($this->input->post('ket_kaunit'));
-			} else if ($sso_user_data->tipe == 'apotik') {
+			} else if ($sso_user_data->tipe == 'kabid') {
 				$db['acc_kabid']     = htmlspecialchars($this->input->post('acc_kabid'));
 				$db['ket_kabid']     = htmlspecialchars($this->input->post('ket_kabid'));
 			} else if ($sso_user_data->tipe == 'kabid_sdm') {
@@ -242,7 +242,7 @@ class Pengajuan_izin extends CI_Controller
 			$result['messages']      = '';
 			if ($sso_user_data->tipe == 'kaunit' && ($db['acc_kaunit'] == 0) && ($db['ket_kaunit'] == '')) {
 				$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
-			} else if (($sso_user_data->tipe == 'apotik') && ($db['acc_kabid'] == 0) && ($db['ket_kabid'] == '')) {
+			} else if (($sso_user_data->tipe == 'kabid') && ($db['acc_kabid'] == 0) && ($db['ket_kabid'] == '')) {
 				$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
 			} else if ($sso_user_data->tipe == 'kabid_sdm' && ($db['acc_kabid_sdm'] == 0) && ($db['ket_kabid_sdm'] == '')) {
 				if ($db['lama_izin'] == 0) {

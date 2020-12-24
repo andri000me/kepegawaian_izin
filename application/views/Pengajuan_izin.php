@@ -588,7 +588,7 @@
 									<textarea name="ket_kaunit" id="ket_kaunit" class="form-control"></textarea>
 								</div>
 							</div>
-						<?php } else if ($getStaff[0]->tipe == 'apotik') { ?>
+						<?php } else if ($getStaff[0]->tipe == 'kabid') { ?>
 							<div class="field item form-group">
 								<label class="col-form-label col-md-4 col-sm-3">Konfirmasi KA Bidang<span class="required">*</span></label>
 								<div class="col-md-8 xdisplay_inputx form-group row ">
