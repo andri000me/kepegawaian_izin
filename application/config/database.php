@@ -76,8 +76,8 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'username' => 'fitra123',
+	'password' => '8{d=]GvYZ,iy',
 	'database' => 'kep_rsbt',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

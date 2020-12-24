@@ -1,10 +1,10 @@
 <!-- Left Sidebar Menu -->
 <div class="fixed-sidebar-left">
 	<ul class="nav navbar-nav side-nav nicescroll-bar">
-	<li>
+		<li>
 			<a href="<?= base_url('Jadwal_dinas') ?>"><i class="ti-calendar mr-10"></i>JADWAL DINAS</a>
 		</li>
-	
+
 		<li>
 			<a href="<?= base_url('Pengajuan_lembur') ?>"><i class="fa fa-wpforms mr-10"></i>PENGAJUAN LEMBUR</a>
 		</li>
