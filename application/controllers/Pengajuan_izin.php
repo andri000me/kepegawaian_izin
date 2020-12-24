@@ -10,9 +10,29 @@ class Pengajuan_izin extends CI_Controller
 		$this->load->model('M_Pengajuan_izin');
 	}
 
-	public function index()
+	// public function index()
+	// {
+	// 	$this->load->view('assets/_header');
+	// 	$page_data['page_content'] = 'Pengajuan_izin';
+	// 	$page_data['getPegawai']   = $this->M_Pengajuan_izin->getPegawai();
+	// 	$sso_user_data = $this->session->userdata('sso_user_data'); //session
+	// 	$page_data['sso_user_data'] = $sso_user_data;
+	// 	$page_data['getStaff'] = $this->M_Pengajuan_izin->getDataStaff($sso_user_data->username);
+	// 	$page_data['getPegawai'] = $this->M_Pengajuan_izin->getPegawaiByUsernameStaff($sso_user_data->username);
+	// 	$page_data['getMaxId'] = $this->M_Pengajuan_izin->getKodeIzin();
+	// 	$page_data['getJenisIzin'] = $this->M_Pengajuan_izin->getJenisIzin();
+	// 	// $getJenisIzinByUsername = $this->M_Pengajuan_izin->getJenisIzinByUsername($sso_user_data->username);
+	// 	// $page_data['getByIdJenisIzin'] = $this->M_Pengajuan_izin->getByIdJenisIzin($getJenisIzinByUsername[0]->id_jenis_izin);
+
+	// 	$this->load->view('Main', $page_data);
+	// 	$this->load->view('assets/_footer');
+	// }
+
+	public function izin($param = '', $id = '')
 	{
+		$sso_user_data = $this->session->userdata('sso_user_data'); //session
 		$this->load->view('assets/_header');
+		$page_data['title'] = 'Pengajuan_izin';
 		$page_data['page_content'] = 'Pengajuan_izin';
 		$page_data['getPegawai']   = $this->M_Pengajuan_izin->getPegawai();
 		$sso_user_data = $this->session->userdata('sso_user_data'); //session
@@ -21,17 +41,6 @@ class Pengajuan_izin extends CI_Controller
 		$page_data['getPegawai'] = $this->M_Pengajuan_izin->getPegawaiByUsernameStaff($sso_user_data->username);
 		$page_data['getMaxId'] = $this->M_Pengajuan_izin->getKodeIzin();
 		$page_data['getJenisIzin'] = $this->M_Pengajuan_izin->getJenisIzin();
-		$page_data['getJenisIzinByUsername'] = $this->M_Pengajuan_izin->getJenisIzinByUsername($sso_user_data->username);
-
-		$this->load->view('Main', $page_data);
-		$this->load->view('assets/_footer');
-	}
-
-	public function izin($param = '', $id = '')
-	{
-		$sso_user_data = $this->session->userdata('sso_user_data'); //session
-		$view['title']    = 'Pengajuan Izin';
-		$view['pageName'] = 'Pengajuan_izin';
 
 		if ($param == 'getAllData') {
 			if ($sso_user_data->tipe == 'kaunit' || $sso_user_data->tipe == 'kabid' || $sso_user_data->tipe == 'kabid_sdm') {
@@ -82,7 +91,7 @@ class Pengajuan_izin extends CI_Controller
 			echo json_encode(array('data' => $data));
 			die;
 		} else if ($param == 'get_by_id') {
-			$data = $this->M_Pengajuan_izin->getById($id);
+			$data = $this->M_Pengajuan_izin->getById1($id);
 			echo json_encode(array('data' => $data));
 			die;
 		} else if ($param == 'addData') {
@@ -218,6 +227,17 @@ class Pengajuan_izin extends CI_Controller
 			} else if ($sso_user_data->tipe == 'apotik') {
 				$db['acc_kabid_sdm'] = htmlspecialchars($this->input->post('acc_kabid_sdm'));
 				$db['ket_sdm']       = htmlspecialchars($this->input->post('ket_sdm'));
+				$getById = $this->M_Pengajuan_izin->getById1($db['id_izin']);
+				// $getByIdJenisIzin = $this->M_Pengajuan_izin->getByIdJenisIzin($getById->id_izin);
+				if ($getById->jenis_izin == 'Lain-lain') {
+					$tgl1 = new DateTime($this->input->post('tgl_mulai'));
+					$tgl2 = new DateTime($this->input->post('tgl_akhir'));
+					$day = $tgl2->diff($tgl1)->days;
+					$db['tgl_mulai']     = htmlspecialchars($this->input->post('tgl_mulai'));
+					$db['tgl_akhir']     = htmlspecialchars($this->input->post('tgl_akhir'));
+					$db['lama_izin']       = $day;
+				} else {
+				}
 			}
 			$result['messages']      = '';
 			if ($sso_user_data->tipe == 'kaunit' && ($db['acc_kaunit'] == 0) && ($db['ket_kaunit'] == '')) {
@@ -225,7 +245,11 @@ class Pengajuan_izin extends CI_Controller
 			} else if (($sso_user_data->tipe == 'kabid') && ($db['acc_kabid'] == 0) && ($db['ket_kabid'] == '')) {
 				$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
 			} else if ($sso_user_data->tipe == 'apotik' && ($db['acc_kabid_sdm'] == 0) && ($db['ket_kabid_sdm'] == '')) {
-				$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
+				if ($db['lama_izin'] == 0) {
+					$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
+				} else {
+					$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
+				}
 			} else {
 				$result          = array('status' => 'success', 'msg' => 'Data Berhasil diubah');
 				$this->M_Pengajuan_izin->update($db['id_izin'], $db);
@@ -241,5 +265,7 @@ class Pengajuan_izin extends CI_Controller
 			echo json_encode(array('result' => $result));
 			die;
 		}
+		$this->load->view('Main', $page_data);
+		$this->load->view('assets/_footer');
 	}
 }

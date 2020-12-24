@@ -91,6 +91,9 @@
 			success: function(resp) {
 				data = resp.data
 				$('[name="id_izin"]').val(data.id_izin);
+				$('[name="lama_izin"]').val(data.izin_lama);
+				$('[name="tgl_mulai"]').val(data.tgl_mulai);
+				$('[name="tgl_akhir"]').val(data.tgl_akhir);
 				$('[name="acc_kaunit"]').val(data.acc_kaunit);
 				$('[name="ket_kaunit"]').val(data.ket_kaunit);
 				$('[name="acc_kabid"]').val(data.acc_kabid);
@@ -98,6 +101,17 @@
 				$('[name="acc_kabid_sdm"]').val(data.acc_kabid_sdm);
 				$('[name="ket_sdm"]').val(data.ket_sdm);
 				$('.reset').hide();
+				if (data.jenis_izin != 'Lain-lain') {
+					$('.tgl_mulai').hide();
+					$('#tgl_mulai_label').hide();
+					$('.tgl_akhir').hide();
+					$('#tgl_akhir_label').hide();
+				} else {
+					$('.tgl_mulai').show();
+					$('#tgl_mulai_label').show();
+					$('.tgl_akhir').show();
+					$('#tgl_akhir_label').show();
+				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert('Error Get Data From Ajax');
@@ -608,11 +622,27 @@
 									<input type="text" id="ket_sdm" name="ket_sdm" class="form-control" required>
 								</div>
 							</div>
+							<!-- <div class="field item form-group">
+								<label class="col-form-label col-md-8 col-sm-3" id="label_lama_izin">Lama Izin <span class="required">*</span> <br><small style="color: green;font-size:10px">(Hanya dapat diisi untuk jenis izin (lainnya))</small></label>
+								<div class="col-md-4 xdisplay_inputx form-group row ">
+									<input type="text" id="lama_izin" name="lama_izin" class="form-control" required>
+								</div>
+							</div> -->
+
+							<div class="field item form-group">
+								<label class="col-form-label col-md-4 col-sm-3" id="tgl_mulai_label">Tanggal Mulai<span class="required">*</span></label>
+								<div class="col-md-8 xdisplay_inputx form-group row ">
+									<input type="date" id="tgl_mulai" name="tgl_mulai" class="form-control tgl_mulai" required>
+								</div>
+							</div>
+							<div class="field item form-group">
+								<label class="col-form-label col-md-4 col-sm-3" id="tgl_akhir_label">Tanggal Berakhir<span class="required">*</span></label>
+								<div class="col-md-8 xdisplay_inputx form-group row ">
+									<input type="date" id="tgl_akhir" name="tgl_akhir" class="form-control tgl_akhir" required>
+								</div>
+							</div>
+
 						<?php } ?>
-						<?php if ($getJenisIzinByUsername[0]->jenis_izin != 'Lain-lain') { ?>
-							asdasd
-						<?php } else {
-						} ?>
 					</div>
 				</div>
 
