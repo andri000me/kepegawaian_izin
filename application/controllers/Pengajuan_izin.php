@@ -112,7 +112,7 @@ class Pengajuan_izin extends CI_Controller
 				$d = $tgl2->diff($tgl1)->days;
 				$getByIdJenisIzin = $this->M_Pengajuan_izin->getByIdJenisIzin($this->input->post('id_jenis_izin'));
 				$db['id_pegawai']    = htmlspecialchars($this->input->post('id_pegawai'));
-				$db['lama_izin']     = $getByIdJenisIzin[0]->lama_izin;
+				$db['lama_izin']     = $d;
 				$db['tgl_mulai']     = htmlspecialchars($this->input->post('tgl_mulai'));
 				$db['tgl_akhir']     = htmlspecialchars($this->input->post('tgl_akhir'));
 				$db['jadwal_off']    = htmlspecialchars($this->input->post('jadwal_off'));
