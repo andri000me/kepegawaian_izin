@@ -56,31 +56,31 @@ class Pengajuan_izin extends CI_Controller
 				$th2  = (get_btn_group1('ubah("' . $id . '")', 'hapus("' . $id . '")')) . (empty($row->bukti_izin) ? '' : btn_upload_gambar('uploadGbr("' . $id . '")'));
 				$th3  = '<div style="font-size:11px;">' . $row->nama . '</div>';
 				$th4  = '<div class="badge bg-cyan" style="font-size:9px;">' . $row->lama_izin . ' Hari</div>';
-				$th5  = '<div style="font-size:11px;">' . tgl_indo($row->tgl_mulai) . '</div>';
-				$th6  = '<div style="font-size:11px;">' . tgl_indo($row->tgl_akhir) . '</div>';
-				$th7  = '<div style="font-size:11px;">' . $row->jadwal_off . '</div>';
+				$th5  = '<div style="font-size:10px;">' . tgl_indo($row->tgl_mulai) . '</div>';
+				$th6  = '<div style="font-size:10px;">' . tgl_indo($row->tgl_akhir) . '</div>';
+				$th7  = '<div style="font-size:10px;">' . $row->jadwal_off . '</div>';
 				if ($sso_user_data->tipe != 'kaunit') {
 					$th8 = $row->acc_kaunit == 0 ? '<label style="font-size:8px;"  class="badge bg-green" >Diajukan</label>' : ($row->acc_kaunit == 1 ? '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-blue" > Terverifikasi</label></div>' : '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-red" > Ditolak</label></div>');
 				} else {
 					$th8 = $row->acc_kaunit == 0 ? '<button style="font-size:8px;" onClick="verifikasi(' . $id . ')" class="badge bg-green" >Diajukan</button>' : ($row->acc_kaunit == 1 ? '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-blue" onClick="verifikasi(' . $id . ')"> Terverifikasi</button></div>' : '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-red" onClick="verifikasi(' . $id . ')"> Ditolak</button></div>');
 				}
 				// $th8  = $sso_user_data->tipe == 'kaunit' ? ($row->acc_kaunit == 0 ? '<button style="font-size:8px;" onclick="verifikasi(' . $id . ')" class="badge bg-red" >Diajukan</button>' : '<div style="font-size:12px;"> <label style="font-size:8px;" class="badge bg-blue" >Terverifikasi</label> </div>') : '<div style="font-size:12px;"> <label style="font-size:8px;" class="badge bg-red">Diajukan</label> </div>';
-				$th9  = '<div style="font-size:12px;">' . $row->ket_kaunit . '</div>';
-				if ($sso_user_data->tipe != 'kabid') {
+				$th9  = '<div style="font-size:10px;">' . $row->ket_kaunit . '</div>';
+				if ($sso_user_data->tipe != 'apotik') {
 					$th10 = $row->acc_kabid == 0 ? '<label style="font-size:8px;"  class="badge bg-green" >Diajukan</label>' : ($row->acc_kabid == 1 ? '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-blue" > Terverifikasi</label></div>' : '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-red" > Ditolak</label></div>');
 				} else {
 					$th10 = $row->acc_kabid == 0 ? '<button style="font-size:8px;" onClick="verifikasi(' . $id . ')" class="badge bg-green" >Diajukan</button>' : ($row->acc_kabid == 1 ? '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-blue" onClick="verifikasi(' . $id . ')"> Terverifikasi</button></div>' : '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-red" onClick="verifikasi(' . $id . ')"> Ditolak</button></div>');
 				}
-				$th11 = '<div style="font-size:12px;">' . $row->ket_kabid . '</div>';
-				if ($sso_user_data->tipe != 'apotik') {
+				$th11 = '<div style="font-size:10px;">' . $row->ket_kabid . '</div>';
+				if ($sso_user_data->tipe != 'kabid_sdm') {
 					$th12 = $row->acc_kabid_sdm == 0 ? '<label style="font-size:8px;"  class="badge bg-green" >Diajukan</label>' : ($row->acc_kabid_sdm == 1 ? '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-blue" > Terverifikasi</label></div>' : '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-red" > Ditolak</label></div>');
 				} else {
 					$th12 = $row->acc_kabid_sdm == 0 ? '<button style="font-size:8px;" onClick="verifikasi(' . $id . ')" class="badge bg-green" >Diajukan</button>' : ($row->acc_kabid_sdm == 1 ? '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-blue" onClick="verifikasi(' . $id . ')"> Terverifikasi</button></div>' : '<div style="font-size:12px;"><button style="font-size:8px;" class="badge bg-red" onClick="verifikasi(' . $id . ')"> Ditolak</button></div>');
 				}
 				// $th12 = $sso_user_data->tipe == 'kabid_sdm' ? ($row->acc_kabid_sdm == 0 ? '<button style="font-size:8px;" onClick="verifikasi(' . $id . ')" class="badge bg-red"> Diajukan</button>' : '<div style="font-size:12px;"><label style="font-size:8px;" class="badge bg-blue" > Terverifikasi</label></div>') : '<div style="font-size:12px;"> <label style="font-size:8px;" class="badge bg-red">Diajukan</label> </div>';
-				$th13 = '<div style="font-size:12px;">' . $row->ket_sdm . '</div>';
+				$th13 = '<div style="font-size:10px;">' . $row->ket_sdm . '</div>';
 				$th14 = empty($row->bukti_izin) ? (btn_upload_gambar('uploadGbr("' . $id . '")')) : '<img src="bukti_izin/' . $row->bukti_izin . '" width="100px" height="100px">';
-				$th15 = '<div style="font-size:12px;">' . $row->jenis_izin . '</div>';
+				$th15 = '<div style="font-size:10px;"><label class="badge bg-blue"  style="font-size:8px;">' . $row->jenis_izin . '</label></div>';
 				$data[]     = gathered_data(array($th1, $th2, $th3, $th4, $th5, $th6, $th7, $th8, $th9, $th10, $th11, $th12, $th13, $th14, $th15));
 			}
 			$dt['data'] = $data;
@@ -221,10 +221,10 @@ class Pengajuan_izin extends CI_Controller
 			if ($sso_user_data->tipe == 'kaunit') {
 				$db['acc_kaunit']    = htmlspecialchars($this->input->post('acc_kaunit'));
 				$db['ket_kaunit']    = htmlspecialchars($this->input->post('ket_kaunit'));
-			} else if ($sso_user_data->tipe == 'kabid') {
+			} else if ($sso_user_data->tipe == 'apotik') {
 				$db['acc_kabid']     = htmlspecialchars($this->input->post('acc_kabid'));
 				$db['ket_kabid']     = htmlspecialchars($this->input->post('ket_kabid'));
-			} else if ($sso_user_data->tipe == 'apotik') {
+			} else if ($sso_user_data->tipe == 'kabid_sdm') {
 				$db['acc_kabid_sdm'] = htmlspecialchars($this->input->post('acc_kabid_sdm'));
 				$db['ket_sdm']       = htmlspecialchars($this->input->post('ket_sdm'));
 				$getById = $this->M_Pengajuan_izin->getById1($db['id_izin']);
@@ -242,9 +242,9 @@ class Pengajuan_izin extends CI_Controller
 			$result['messages']      = '';
 			if ($sso_user_data->tipe == 'kaunit' && ($db['acc_kaunit'] == 0) && ($db['ket_kaunit'] == '')) {
 				$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
-			} else if (($sso_user_data->tipe == 'kabid') && ($db['acc_kabid'] == 0) && ($db['ket_kabid'] == '')) {
+			} else if (($sso_user_data->tipe == 'apotik') && ($db['acc_kabid'] == 0) && ($db['ket_kabid'] == '')) {
 				$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
-			} else if ($sso_user_data->tipe == 'apotik' && ($db['acc_kabid_sdm'] == 0) && ($db['ket_kabid_sdm'] == '')) {
+			} else if ($sso_user_data->tipe == 'kabid_sdm' && ($db['acc_kabid_sdm'] == 0) && ($db['ket_kabid_sdm'] == '')) {
 				if ($db['lama_izin'] == 0) {
 					$result          = array('status' => 'error', 'msg' => 'Gagal, data tidak boleh kosong !');
 				} else {
